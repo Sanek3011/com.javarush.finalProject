@@ -26,9 +26,9 @@ spring:
         # https://stackoverflow.com/questions/21257819/what-is-the-difference-between-hibernate-jdbc-fetch-size-and-hibernate-jdbc-batc
         jdbc.batch_size: 20
   datasource:
-    url: jdbc:postgresql://localhost:5432/jira
-    username: jira
-    password: JiraRush
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
 
   liquibase:
     changeLog: "classpath:db/changelog.sql"
@@ -51,21 +51,21 @@ spring:
       client:
         registration:
           github:
-            client-id: 3d0d8738e65881fff266
-            client-secret: 0f97031ce6178b7dfb67a6af587f37e222a16120
+            client-id: ${GITHUB_ID}
+            client-secret: ${GITHUB_KEY}
             scope:
               - email
           google:
-            client-id: 329113642700-f8if6pu68j2repq3ef6umd5jgiliup60.apps.googleusercontent.com
-            client-secret: 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
+            client-id: ${GOOGLE_ID}
+            client-secret: ${GOOGLE_KEY}
             scope:
               - email
               - profile
 
           gitlab:
-            client-id: b8520a3266089063c0d8261cce36971defa513f5ffd9f9b7a3d16728fc83a494
-            client-secret: e72c65320cf9d6495984a37b0f9cc03ec46be0bb6f071feaebbfe75168117004
-            client-name: GitLab
+            client-id: ${GITLAB_ID}
+            client-secret: ${GITLAB_KEY}
+            client-name: ${GITLAB_NAME}
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             authorization-grant-type: authorization_code
             scope: read_user
@@ -87,10 +87,10 @@ spring:
           starttls:
             enable: true
           auth: true
-    host: smtp.gmail.com
-    username: jira4jr@gmail.com
-    password: zdfzsrqvgimldzyj
-    port: 587
+    host: ${EMAIL_HOST}
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASS}
+    port: ${EMAIL_PORT}
   thymeleaf.check-template-location: false
 
   mvc.throw-exception-if-no-handler-found: true
