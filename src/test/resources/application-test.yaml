@@ -1,8 +1,54 @@
 spring.cache.type: none
 spring:
+  liquibase:
+    enabled: false
+
   init:
     mode: always
   datasource:
-    url: jdbc:postgresql://localhost:5433/jira-test
-    username: jira
-    password: JiraRush
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    hikari:
+      maximum-pool-size: 5
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_ID}
+            client-secret: ${GITHUB_KEY}
+            scope:
+              - email
+          google:
+            client-id: ${GOOGLE_ID}
+            client-secret: ${GOOGLE_KEY}
+            scope:
+              - email
+              - profile
+
+          gitlab:
+            client-id: ${GITLAB_ID}
+            client-secret: ${GITLAB_KEY}
+            client-name: ${GITLAB_NAME}
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            scope: read_user
+        provider:
+          gitlab:
+            authorization-uri: https://gitlab.com/oauth/authorize
+            token-uri: https://gitlab.com/oauth/token
+            user-info-uri: https://gitlab.com/api/v4/user
+            user-name-attribute: email
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+    host: ${EMAIL_HOST}
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASS}
+    port: ${EMAIL_PORT}
