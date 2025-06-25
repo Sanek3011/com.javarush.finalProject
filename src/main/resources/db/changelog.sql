@@ -333,3 +333,9 @@ create unique index UK_USER_BELONG on USER_BELONG (OBJECT_ID, OBJECT_TYPE, USER_
 --changeset sanek3011:rename-column-20250624
 alter table contact rename COLUMN VALUE to VAL;
 
+--changeset sanek3011:task8-insert-some-value
+insert into ACTIVITY (ID, AUTHOR_ID, TASK_ID, UPDATED, STATUS_CODE)
+values
+    (7, 11, 111, timestamp '2024-06-20 10:00:00', 'in_progress'),
+    (8, 11, 111, timestamp '2024-06-21 16:30:00', 'ready_for_review'),
+    (9, 11, 111, timestamp '2024-06-23 09:15:00', 'done');

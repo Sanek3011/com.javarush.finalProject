@@ -2,12 +2,15 @@ package com.javarush.jira.bugtracking.task;
 
 import com.javarush.jira.bugtracking.Handlers;
 import com.javarush.jira.bugtracking.task.to.ActivityTo;
+import com.javarush.jira.bugtracking.task.to.TaskTo;
 import com.javarush.jira.common.error.DataConflictException;
 import com.javarush.jira.login.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.javarush.jira.bugtracking.task.TaskUtil.getLatestValue;
@@ -51,6 +54,22 @@ public class ActivityService {
         checkBelong(activity);
         handler.delete(activity.id());
         updateTaskIfRequired(activity.getTaskId(), activity.getStatusCode(), activity.getTypeCode());
+    }
+
+    public String getTaskDurationInProgress(Task task) {
+        LocalDateTime startTime = handler.getRepository().findUpdatedDateByTaskIdAndStatusCode(task.getId(), "in_progress");
+        LocalDateTime endTime = handler.getRepository().findUpdatedDateByTaskIdAndStatusCode(task.getId(), "ready_for_review");
+        return getReadableDurationText(startTime, endTime);
+    }
+    public String getTaskDurationInTests(Task task) {
+        LocalDateTime startTime = handler.getRepository().findUpdatedDateByTaskIdAndStatusCode(task.getId(), "ready_for_review");
+        LocalDateTime endTime = handler.getRepository().findUpdatedDateByTaskIdAndStatusCode(task.getId(), "done");
+        return getReadableDurationText(startTime, endTime);
+    }
+
+    private String getReadableDurationText(LocalDateTime start, LocalDateTime end) {
+        Duration dur = Duration.between(start, end);
+        return "%dh %02dm".formatted(dur.toHours(), dur.toMinutesPart());
     }
 
     private void updateTaskIfRequired(long taskId, String activityStatus, String activityType) {

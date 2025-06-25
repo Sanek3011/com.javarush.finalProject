@@ -20,9 +20,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import static com.javarush.jira.common.BaseHandler.createdResponse;
 
@@ -156,4 +158,15 @@ public class TaskController {
             this(taskTo, new LinkedList<>());
         }
     }
+
+    @PutMapping("/{id}/tags/add")
+    public void addTag(@PathVariable long id, @RequestBody Set<String> tags) {
+        taskService.addTag(id, tags);
+    }
+
+    @GetMapping("/{id}/tags")
+    public Set<String> getTags(@PathVariable long id) {
+        return taskService.getTags(id);
+    }
+
 }

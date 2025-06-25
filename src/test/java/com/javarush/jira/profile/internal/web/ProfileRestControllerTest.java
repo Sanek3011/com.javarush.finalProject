@@ -67,7 +67,7 @@ class ProfileRestControllerTest extends AbstractControllerTest {
         ProfileTo profileTo = new ProfileTo(
                 5L,
                 Set.of("assigned", "deadline"),
-                Set.of(new ContactTo("skype", "adminSkype"), new ContactTo("vk", "adminVk"))
+                Set.of(new ContactTo("skype", "adminSkype"))
         );
         mockMvc.perform(put("/api/profile").with(httpBasic("admin@gmail.com", "admin"))
                         .contentType("application/json;charset=UTF-8")
@@ -82,7 +82,7 @@ class ProfileRestControllerTest extends AbstractControllerTest {
         ProfileTo profileTo = new ProfileTo(
                 2L,
                 Set.of("assigned", "deadline"),
-                Set.of(new ContactTo("skype", "adminSkype"), new ContactTo("vk", "adminVk"))
+                Set.of(new ContactTo("skype", "adminSkype"))
         );
         mockMvc.perform(put("/api/profile").with(httpBasic("admin@gmail.com", "admin"))
                 .contentType("application/json;charset=UTF-8")

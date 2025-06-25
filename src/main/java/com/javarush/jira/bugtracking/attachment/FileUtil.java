@@ -25,7 +25,7 @@ public class FileUtil {
             throw new IllegalRequestDataException("Select a file to upload.");
         }
         try {
-        Path path = Path.of(directoryPath, fileName);
+        Path path = Path.of(directoryPath, fileName).normalize();
         multipartFile.transferTo(path);
 
             } catch (IOException ex) {
