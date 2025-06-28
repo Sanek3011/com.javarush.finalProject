@@ -8,8 +8,13 @@ app:
     max-pool-size: 100
 
 spring:
-  init:
-    mode: never
+  sql:
+    init:
+      data-locations: classpath:/data4dev/data.sql
+      mode: always
+  thymeleaf:
+    prefix: file:/app/resources/mails/
+    suffix: .html
   jpa:
     show-sql: true
     open-in-view: false
@@ -76,9 +81,6 @@ spring:
             user-info-uri: https://gitlab.com/api/v4/user
             user-name-attribute: email
 
-  sql:
-    init:
-      mode: always
 
   mail:
     properties:
@@ -109,7 +111,7 @@ logging:
 
 server:
   #  https://springdoc.org/index.html#how-can-i-deploy-springdoc-openapi-ui-behind-a-reverse-proxy
-  forward-headers-strategy: framework
+  forward-headers-strategy: native
   servlet:
     encoding:
       charset: UTF-8 # Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly

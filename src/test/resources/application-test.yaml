@@ -52,3 +52,6 @@ spring:
     username: ${EMAIL_USERNAME}
     password: ${EMAIL_PASS}
     port: ${EMAIL_PORT}
+  sql:
+    init:
+      data-locations: classpath:data4devtest/data.sql
