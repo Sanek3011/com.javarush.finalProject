@@ -20,7 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class RegisterControllerTest extends AbstractControllerTest {
 
-    @Disabled
     @Test
     void showRegisterPage() throws Exception {
         perform(MockMvcRequestBuilders.get(REGISTER_URL))
@@ -70,7 +69,7 @@ class RegisterControllerTest extends AbstractControllerTest {
                 .with(csrf()))
                 .andExpect(status().isForbidden());
     }
-    @Disabled
+
     @Test
     void registerInvalid() throws Exception {
         perform(MockMvcRequestBuilders.post(REGISTER_URL)

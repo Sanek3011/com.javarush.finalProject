@@ -145,7 +145,9 @@ public class TaskService {
     @Transactional
     public void addTag(long id, Set<String> tags) {
         Task task = handler.getRepository().findById(id).orElseThrow(() -> new NotFoundException("Task not found"));
-        task.setTags(tags);
+        for (String str : tags) {
+            task.getTags().add(str);
+        }
     }
 
     public Set<String> getTags(long id) {

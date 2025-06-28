@@ -1,6 +1,7 @@
 package com.javarush.jira.common.internal.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -17,12 +18,13 @@ public class ThymeleafConfig {
 
     @Bean
     // Attention: with TemplateEngine clear cache doesn't work
-    public SpringTemplateEngine thymeleafTemplateEngine() {
+    public SpringTemplateEngine thymeleafTemplateEngine(@Value("${template.mail-path}") String mailPath,
+                                                        @Value("${template.view-path}") String viewPath) {
         SpringTemplateEngine engine = new SpringTemplateEngine();
-        FileTemplateResolver viewResolver = createTemplateResolver("/app/resources/view/");
+        FileTemplateResolver viewResolver = createTemplateResolver(viewPath);
         viewResolver.setCheckExistence(true);
         viewResolver.setOrder(1);
-        FileTemplateResolver mailResolver = createTemplateResolver("/app/resources/mails/");
+        FileTemplateResolver mailResolver = createTemplateResolver(mailPath);
         viewResolver.setCheckExistence(true);
         mailResolver.setOrder(2);
         engine.setTemplateResolvers(Set.of(viewResolver, mailResolver));

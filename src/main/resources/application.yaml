@@ -118,3 +118,7 @@ server:
       enabled: true # Enable http encoding support
       force: true
 springdoc.swagger-ui.path: /doc
+
+template:
+  view-path: ${VIEW_PATH:./resources/view/}
+  mail-path: ${MAIL_PATH:./resources/mails}

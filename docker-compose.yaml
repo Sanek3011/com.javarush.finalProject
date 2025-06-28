@@ -35,6 +35,8 @@ services:
       EMAIL_USERNAME: jira4jr@gmail.com
       EMAIL_PASS: zdfzsrqvgimldzyj
       EMAIL_PORT: 587
+      VIEW_PATH: /app/resources/view/
+      MAIL_PATH: /app/resources/mails/
     networks:
       - jira-network
   nginx:
