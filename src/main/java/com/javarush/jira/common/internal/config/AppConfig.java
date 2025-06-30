@@ -31,7 +31,6 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 @Configuration
 @Slf4j
 @EnableCaching
-@PropertySource("classpath:pass.properties")
 @RequiredArgsConstructor
 @EnableScheduling
 public class AppConfig {
