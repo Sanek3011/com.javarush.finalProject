@@ -54,4 +54,4 @@ spring:
     port: ${EMAIL_PORT}
   sql:
     init:
-      data-locations: classpath:data4devtest/data.sql
+      data-locations: classpath:/data.sql
