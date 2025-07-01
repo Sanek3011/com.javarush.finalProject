@@ -1,5 +1,7 @@
 spring.cache.type: none
 spring:
+  config:
+    import: classpath:pass.yaml
   liquibase:
     enabled: false
 
@@ -17,21 +19,21 @@ spring:
       client:
         registration:
           github:
-            client-id: ${github.id}
-            client-secret: ${github.key}
+            client-id: ${GITHUB_ID}
+            client-secret: ${GITHUB_KEY}
             scope:
               - email
           google:
-            client-id: ${google.id}
-            client-secret: ${google.key}
+            client-id: ${GOOGLE_ID}
+            client-secret: ${GOOGLE_KEY}
             scope:
               - email
               - profile
 
           gitlab:
-            client-id: ${gitlab.id}
-            client-secret: ${github.key}
-            client-name: ${gitlab.name}
+            client-id: ${GITLAB_ID}
+            client-secret: ${GITLAB_KEY}
+            client-name: ${GITLAB_NAME}
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             authorization-grant-type: authorization_code
             scope: read_user
@@ -48,10 +50,13 @@ spring:
           starttls:
             enable: true
           auth: true
-    host: ${email.host}
-    username: ${email.username}
-    password: ${email.password}
-    port: ${email.port}
+    host: ${EMAIL_HOST}
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASS}
+    port: ${EMAIL_PORT}
   sql:
     init:
       data-locations: classpath:/data.sql
+template:
+  view-path: ./resources/view/
+  mail-path: ./resources/mails

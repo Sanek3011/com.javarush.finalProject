@@ -1,0 +1,5 @@
+FROM nginx:stable-alpine
+
+COPY resources /app/resources
+
+COPY config/nginx.conf /etc/nginx/nginx.conf

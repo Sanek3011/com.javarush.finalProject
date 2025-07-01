@@ -33,6 +33,7 @@ class RegisterControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.get(REGISTER_URL))
                 .andExpect(status().isForbidden());
     }
+
     @Disabled
     @Test
     void register() throws Exception {
@@ -82,7 +83,7 @@ class RegisterControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("unauth/register"));
     }
-    @Disabled
+
     @Test
     void registerDuplicateEmail() throws Exception {
         perform(MockMvcRequestBuilders.post(REGISTER_URL)
