@@ -17,21 +17,21 @@ spring:
       client:
         registration:
           github:
-            client-id: ${GITHUB_ID}
-            client-secret: ${GITHUB_KEY}
+            client-id: ${github.id}
+            client-secret: ${github.key}
             scope:
               - email
           google:
-            client-id: ${GOOGLE_ID}
-            client-secret: ${GOOGLE_KEY}
+            client-id: ${google.id}
+            client-secret: ${google.key}
             scope:
               - email
               - profile
 
           gitlab:
-            client-id: ${GITLAB_ID}
-            client-secret: ${GITLAB_KEY}
-            client-name: ${GITLAB_NAME}
+            client-id: ${gitlab.id}
+            client-secret: ${github.key}
+            client-name: ${gitlab.name}
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             authorization-grant-type: authorization_code
             scope: read_user
@@ -48,10 +48,10 @@ spring:
           starttls:
             enable: true
           auth: true
-    host: ${EMAIL_HOST}
-    username: ${EMAIL_USERNAME}
-    password: ${EMAIL_PASS}
-    port: ${EMAIL_PORT}
+    host: ${email.host}
+    username: ${email.username}
+    password: ${email.password}
+    port: ${email.port}
   sql:
     init:
       data-locations: classpath:/data.sql
